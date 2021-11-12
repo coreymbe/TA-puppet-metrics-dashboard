@@ -12,8 +12,8 @@
         <query>`puppet_metrics_index` sourcetype="puppet:metrics"
 | dedup pe_console
 | table pe_console</query>
-        <earliest>-24h@h</earliest>
-        <latest>now</latest>
+        <earliest>$field2.earliest$</earliest>
+        <latest>$field2.latest$</latest>
       </search>
     </input>
     <input type="dropdown" token="host" searchWhenChanged="true">
@@ -26,8 +26,8 @@
         <query>`puppet_metrics_index` sourcetype="puppet:metrics" $pe_console$
 | dedup host
 | table host</query>
-        <earliest>-24h@h</earliest>
-        <latest>now</latest>
+        <earliest>$field2.earliest$</earliest>
+        <latest>$field2.latest$</latest>
       </search>
     </input>
     <input type="dropdown" token="field1">
