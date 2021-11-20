@@ -5,7 +5,7 @@ on: push
 jobs:
   appinspect:
     runs-on: ubuntu-latest
-    container: ghcr.io/ermontross/appinspect:latest
+    container: ghcr.io/coreymbe/splunk-appinspect:latest
 
     steps:
       - uses: actions/checkout@v2
