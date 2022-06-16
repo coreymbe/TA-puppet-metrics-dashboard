@@ -1,9 +1,6 @@
 *.pyc
 .vscod*
 .DS_Store
-local/data/*
-local/passwords.conf
-local/savedsearches.conf
-local/ta_puppet_report_viewer_settings.conf
+local
 metadata/local.meta
 tmpdir/

@@ -1,0 +1,23 @@
+name: Package Splunk App
+
+on:
+  push:
+    tags:
+      - v[0-9]+.[0-9]+.[0-9]+
+
+jobs:
+  package-app:
+    runs-on: ubuntu-latest
+    container: ghcr.io/coreymbe/splunk-appinspect:v2
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Build and Package App
+        run: slim package TA-puppet-metrics-dashboard
+
+      - name: Upload App Build
+        uses: actions/upload-artifact@v3
+        with:
+          name: Puppet Report Viewer
+          path: TA-puppet-metrics-dashboard-*.tar.gz
