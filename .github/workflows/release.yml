@@ -13,11 +13,15 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Set Version ID
+        id: version-tag
+        run: echo ::set-output name=version::${GITHUB_REF#refs/*/}
+
       - name: Build and Package App
-        run: slim package TA-puppet-metrics-dashboard
+        run: slim package TA-puppet-metrics-dashboard -o /
 
       - name: Upload App Build
         uses: actions/upload-artifact@v3
         with:
-          name: Puppet Report Viewer
-          path: TA-puppet-metrics-dashboard-*.tar.gz
+          name: TA-puppet-metrics-dashboard-${{ steps.version-tag.outputs.version }}
+          path: /TA-puppet-metrics-dashboard-*.tar.gz
