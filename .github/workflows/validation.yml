@@ -16,27 +16,27 @@ jobs:
       - name: Run AppInspect
         run: splunk-appinspect inspect TA-puppet-metrics-dashboard --output-file appinspect_result.json --mode precert
 
-      - name: Get AppInspect Errors
+      - name: Check AppInspect Errors
         id: appinspect-errors
         run: |
           error_check=$(jq '.summary.error' appinspect_result.json)
           echo "::set-output name=error_count::$error_check"
 
-      - name: Get AppInspect Failures
+      - name: Check AppInspect Failures
         id: appinspect-failures
         run: |
           fail_check=$(jq '.summary.failure' appinspect_result.json)
           echo "::set-output name=fail_count::$fail_check"
 
-      - name: Check AppInspect Errors
+      - name: AppInspect Errors
         if: ${{ steps.appinspect-errors.outputs.error_count > 0 }}
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           script: core.setFailed('AppInspect contains errors!')
 
-      - name: Check AppInspect Failures
+      - name: AppInspect Failures
         if: ${{ steps.appinspect-failures.outputs.fail_count > 0 }}
-        uses: actions/github-script@v3
+        uses: actions/github-script@v6
         with:
           script: core.setFailed('AppInspect contains failures!')
 
